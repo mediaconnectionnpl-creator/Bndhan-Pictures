@@ -7,10 +7,14 @@
 // ====== SET THESE THREE LINES ======
 const OWNER_EMAIL = '';                         // your email: you get a message for every new booking, order, message, review
 const ADMIN_PASSWORD = 'change-this-password';  // your admin password (you can change it later inside the admin panel)
-const ROOT_FOLDER_ID = '1STmsfp0BYTasgqiDimKVNTl5fcfIduKG';   // your BANDHAN PICTURES folder on Drive
+const ROOT_FOLDER_ID = '1VbfT3JurhqiaUQ4Kn22Gq2IC8b4lRcZb';   // your BANDHAN PICTURES folder on Drive
+const SHEET_ID = '1-EMUPsBs_jP9W8LmskWOLI8cOvT0kAcPtoA3jkhFB-I';  // your Google Sheet (data tabs are created here)
 // ====================================
 
-const PHOTOS_FOLDER_ID = '1V5n1sS84B_lJrCH844xGZCfEdoB4Ttml';  // Photos sub-folder (uploads are stored here)
+function photosFolder() {  // 'Photos' sub-folder inside the root folder (created automatically)
+  const root = DriveApp.getFolderById(ROOT_FOLDER_ID), it = root.getFoldersByName('Photos');
+  return it.hasNext() ? it.next() : root.createFolder('Photos');
+}
 const COLLECTIONS = ['bookings', 'orders', 'messages', 'reviews', 'subscribers'];
 const PERM = { bookings: ['bookings', 'track'], orders: ['orders'], messages: ['msgs'], reviews: ['inbox'], subscribers: ['subs'] };
 const MAX_JSON = 6000;
@@ -43,11 +47,11 @@ function doPost(e) {
 }
 
 function out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
-function setup() { COLLECTIONS.forEach(sheet); DriveApp.getFolderById(ROOT_FOLDER_ID); if (OWNER_EMAIL) MailApp.sendEmail(OWNER_EMAIL, 'Bandhan Pictures backend is ready', 'Your Google Sheet and Drive are connected.'); }
+function setup() { COLLECTIONS.forEach(sheet); DriveApp.getFolderById(ROOT_FOLDER_ID); photosFolder(); writeJson('content.json', readJson('content.json') || {}); if (OWNER_EMAIL) MailApp.sendEmail(OWNER_EMAIL, 'Bandhan Pictures backend is ready', 'Your Google Sheet and Drive are connected.'); }
 
 // ---------- storage helpers ----------
 function sheet(n) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   let sh = ss.getSheetByName(n);
   if (!sh) { sh = ss.insertSheet(n); sh.appendRow(['id', 'ts', 'json']); }
   return sh;
@@ -202,7 +206,7 @@ function upload(d, s) {
   if (['image/jpeg', 'image/png', 'image/webp', 'image/gif'].indexOf(mime) < 0) return { ok: false, err: 'type' };
   if (!d.b64 || d.b64.length > 8000000) return { ok: false, err: 'size' };
   const blob = Utilities.newBlob(Utilities.base64Decode(d.b64), mime, String(d.name || 'photo.jpg').replace(/[^\w.\-]/g, '_'));
-  const f = DriveApp.getFolderById(PHOTOS_FOLDER_ID).createFile(blob);
+  const f = photosFolder().createFile(blob);
   f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   return { ok: true, url: 'https://lh3.googleusercontent.com/d/' + f.getId() };
 }
