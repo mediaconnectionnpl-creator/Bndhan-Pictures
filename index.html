@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ne"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" id="md" content=""><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E"><title>Bandhan Pictures | Wedding &amp; Event Photography</title>
@@ -125,7 +126,7 @@ const SRC='<!DOCTYPE html>\n'+document.documentElement.outerHTML;const LOGO='dat
 const sesu=()=>{try{return sessionStorage.getItem('bp_u')||'owner'}catch(e){return 'owner'}};
 const ses=()=>{try{return sessionStorage.getItem('bp_a')==='1'}catch(e){return false}};
 /* ===== SET THIS after you deploy the Google Apps Script (see LAUNCH-GUIDE.md) ===== */
-const API_URL='PASTE_YOUR_WEB_APP_URL_HERE';
+const API_URL='https://script.google.com/macros/s/AKfycbx7MyJerueQgdumLt9Inrm365ouH-aoFmQ9jSSrUXTynp9dib6GyGgbRxBIPcoDh2ox/exec';
 /* ================================================================================= */
 const API=/^https:\/\/script\.google\.com\//.test(API_URL)?API_URL:'';
 let TOKEN='',PUBREV=[],TAKEN=[];try{TOKEN=sessionStorage.getItem('bp_t')||''}catch(e){}
@@ -143,7 +144,7 @@ const PR0=[{id:'album',n:'Premium Album (30 pages)',p:6500},{id:'frame',n:'Canva
 const GL=[['Wedding','Sita & Ram','Biratnagar'],['Wedding','Evening baraat','Itahari'],['Pre-wedding','Hilltop shoot','Dharan'],['Bratabandha','Ceremony','Inaruwa'],['Events','Pasni day','Itahari'],['Wedding','The vows','Damak'],['Pre-wedding','Tea garden','Ilam'],['Events','Corporate night','Biratnagar'],['Bratabandha','Family portrait','Itahari'],['Wedding','Mehendi','Dharan'],['Pre-wedding','Sunrise','Koshi'],['Events','Birthday','Itahari']];
 const TS=[['Their team felt like family at our wedding. We found ourselves in every photo.','Anita & Suman'],['Delivered the bratabandha album before the date they promised.','R. Karki'],['Calm, polite and quick. Our pasni photos look natural.','Sabina Rai']];
 const FQ=[['How early should I book?','Two to three months for wedding season (Mangsir, Falgun, Baisakh). Event shoots need one week.'],['How much advance do I pay?','30% confirms the date. The rest is due on the event day.'],['Do you travel outside Koshi?','Yes. Travel and stay are quoted upfront before you confirm.'],['When do I get my photos?','Gallery in 7 to 14 days. Albums take about 30 days.']];
-const S=()=>Object.assign({phone:'+977-9806052844',wa:'9779806052844',email:'mediaconnectionnpl@gmail.com',addr:'Itahari, Koshi, Nepal',head:'We capture your memories forever.. 💕',sub:'Weddings, bratabandha, pasni and family portraits across Koshi, photographed candidly and delivered on time.',ann:'',annOn:0,store:1,rev:1,waOn:1,adv:30,name:'Bandhan Pictures',phone2:'',map:'',fb:'',ig:'',yt:'',tt:'',mt:'',md:'',og:'',ga:'',s1:'200+',s2:'150+',s3:'5 yrs',s4:'300+'},CFG.site||{});
+const S=()=>Object.assign({phone:'+977-98XXXXXXXX',wa:'9779806052844',email:'hello@bandhanpictures.com.np',addr:'Itahari, Koshi, Nepal',head:'We capture your memories forever.. 💕',sub:'Weddings, bratabandha, pasni and family portraits across Koshi, photographed candidly and delivered on time.',ann:'',annOn:0,store:1,rev:1,waOn:1,adv:30,name:'Bandhan Pictures',phone2:'',map:'',fb:'',ig:'',yt:'',tt:'',mt:'',md:'',og:'',ga:'',s1:'200+',s2:'150+',s3:'5 yrs',s4:'300+'},CFG.site||{});
 const PKa=()=>CFG.pk||PK0,PRa=()=>CFG.pr||PR0,ADa=()=>CFG.ad||AD0,PKf=()=>PKa().filter(p=>!p.off),PRf=()=>PRa().filter(p=>!p.off),ADf=()=>ADa();
 const tk=(B,k)=>(CFG.blocked||[]).includes(k)||TAKEN.includes(k)||B.some(x=>x.date===k&&(x.st==='Confirmed'||x.st==='Completed'));
 let AT='dash',BPOST='',PASS='bandhan123',admin=ses(),WHO=sesu(),LN='en',cm=0,qs='',LR='',cart={},flt='All',fs='All';
